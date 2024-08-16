@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    // "rootDir": "./src",
+    // "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+    },
+
+    "include": [
+        "transaction-service/src/**/*.ts",
+        "payment-gateway-service/src/**/*.ts",
+        "user-account-service/src/**/*.ts"
+    ]
+
+   }

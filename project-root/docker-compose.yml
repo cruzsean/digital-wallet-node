@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+ user-account-service:
+  build:
+    context: ./user-account-service
+  ports:
+  - "3001:3000"
+  environment:
+  - MONGO_URI=${MONGO_URI}
+  depends_on:
+  - mongodb
+  networks:
+  - mynetwork
+
+ transaction-service: 
+  build:
+    context: ./transaction-service
+  ports:
+  - "3002:3000"
+  depends_on:
+  - mongodb
+  networks:
+  - mynetwork
+
+ payment-gateway-service:
+  build:
+    context: ./payment-gateway-service
+  ports:
+  - "3003:3000"
+  depends_on:
+  - mongodb
+  networks:
+  - mynetwork
+
+ mongodb:
+  image: mongo:latest
+  environment:
+      MONGO_INITDB_ROOT_USERNAME: mongos
+      MONGO_INITDB_ROOT_PASSWORD: mongos
+  ports:
+  - "27017:27017"
+  volumes:
+  - mongo-data:/data/db
+  networks:
+  - mynetwork
+networks:
+ mynetwork:
+
+volumes:
+ mongo-data:
